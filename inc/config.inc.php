@@ -11,7 +11,7 @@ namespace PHS;
 defined('PHS') or die('Forbidden acces');
 
 
-define('DEBUG', false); // FALSE = Development mode | TRUE = Production mode
+define('DEBUG', true); // FALSE = Development mode | TRUE = Production mode
 define('STYLE_NAME', 'classic');
 define('DEFAULT_LANG', 'en_US');
 define('LANG_DOMAIN', 'shorturl');

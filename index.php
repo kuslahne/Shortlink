@@ -19,11 +19,11 @@ require ROOT_PATH . 'inc/init.inc.php';
 putenv('LC_ALL=' . DEFAULT_LANG);
 setlocale(LC_ALL, DEFAULT_LANG);
 
-bindtextdomain(LANG_DOMAIN, LANG_PATH);
-bind_textdomain_codeset(LANG_DOMAIN, ENCODING);
+// bindtextdomain(LANG_DOMAIN, LANG_PATH);
+// bind_textdomain_codeset(LANG_DOMAIN, ENCODING);
 
 // Choose domain
-textdomain(LANG_DOMAIN);
+// textdomain(LANG_DOMAIN);
 
 Slim::registerAutoloader();
 
@@ -38,7 +38,6 @@ if (is_writable(TPL_CACHE))
 Twig::$twigExtensions = array(
     'Twig_Extensions_Slim',
     'Twig_Extension_Debug',
-    'Twig_Extensions_Extension_I18n'
 );
 
 
@@ -75,6 +74,7 @@ $oApp->get('/', function() use ($oApp)
 $oApp->get('/add', function() use ($oApp)
 {
     global $aViewParams;
+    // print_r($aViewParams);
     return $oApp->render('add.twig', $aViewParams);
 });
 
@@ -87,7 +87,7 @@ $oApp->post('/add', function() use ($oApp)
     // Check link
     if (!filter_var($sLink, FILTER_VALIDATE_URL))
     {
-        $oApp->flash('error', gettext('Invalid link!'));
+        $oApp->flash('error', 'Invalid link!');
         $oApp->redirect(ROOT_URL);
     }
     else
@@ -101,7 +101,7 @@ $oApp->post('/add', function() use ($oApp)
             $oUrl->ip = $oApp->request()->getIp();
             $oUrl->save();
         }
-        $oApp->flash('success', sprintf(gettext('The shortened URL is available at: %s'), ROOT_URL . '/' . $oLink->find_many()[0]->id));
+        $oApp->flash('success', 'The shortened URL is available at: %s' , ROOT_URL . '/' . $oLink->find_many()[0]->id);
         $oApp->redirect(ROOT_URL); // Go to the list of links
     }
 });
